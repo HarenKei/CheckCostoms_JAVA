@@ -11,10 +11,10 @@ public class myParser {
         return scFile.nextLine();
     }
     private static String AddressMaker(String key, String hBl, String year){
-        String adress = "https://unipass.customs.go.kr:38010/ext/rest/cargCsclPrgs" +
+        String address = "https://unipass.customs.go.kr:38010/ext/rest/cargCsclPrgs" +
                 "InfoQry/retrieveCargCsclPrgsInfo?crkyCn="
                 + key + "&hblNo=" + hBl + "&blYy=" + year;
-        return adress;
+        return address;
     }
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -25,9 +25,9 @@ public class myParser {
         String year = sc.next();
         System.out.print("화물의 송장 번호를 입력하세요 (우체국택배 / 대한통운) : ");
         String hBl = sc.next();
-        String adress = AddressMaker(key, hBl, year);
+        String address = AddressMaker(key, hBl, year);
 
-        Source source = new Source(new URL(adress));
+        Source source = new Source(new URL(address));
 
         //파싱 후 출력
         System.out.println();
