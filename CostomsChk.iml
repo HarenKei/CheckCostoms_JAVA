@@ -10,16 +10,10 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jericho-html-3.4.zip!/" />
+          <root url="jar://$USER_HOME$/Downloads/jericho-html-3.4/dist/jericho-html-3.4.jar!/" />
         </CLASSES>
-        <JAVADOC>
-          <root url="jar://$USER_HOME$/Downloads/jericho-html-3.4.zip!/jericho-html-3.4/docs/javadoc" />
-        </JAVADOC>
-        <SOURCES>
-          <root url="jar://$USER_HOME$/Downloads/jericho-html-3.4.zip!/jericho-html-3.4/samples/console/src" />
-          <root url="jar://$USER_HOME$/Downloads/jericho-html-3.4.zip!/jericho-html-3.4/src/java" />
-          <root url="jar://$USER_HOME$/Downloads/jericho-html-3.4.zip!/jericho-html-3.4/test/src" />
-        </SOURCES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>
