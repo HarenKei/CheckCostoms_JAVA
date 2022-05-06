@@ -4,35 +4,49 @@ import java.util.Scanner;
 import java.io.IOException;
 import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.Source;
-import java.util.List;
 
 public class myParser {
-    public static void main(String[] args) throws IOException {
+    private static String KeyLoader() throws IOException{
         Scanner scFile = new Scanner(new File("././key"));
+        return scFile.nextLine();
+    }
+    private static String AddressMaker(String key, String hBl, String year){
+        String adress = "https://unipass.customs.go.kr:38010/ext/rest/cargCsclPrgs" +
+                "InfoQry/retrieveCargCsclPrgsInfo?crkyCn="
+                + key + "&hblNo=" + hBl + "&blYy=" + year;
+        return adress;
+    }
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        String key = scFile.nextLine();
-        String year;
-        String hBl;
+        String key = KeyLoader();
 
         System.out.println("<<<화물 통관 정보를 조회합니다.>>>");
         System.out.print("화물의 귀속 연도를 입력하세요 : ");
-        year = sc.next();
-        System.out.print("화물의 송장 번호를 입력하세요 : ");
-        hBl = sc.next();
-
-        String adress = "https://unipass.customs.go.kr:38010/ext/rest/cargCsclPrgsInfoQry/retrieveCargCsclPrgsInfo?crkyCn="
-                + key + "&hblNo=" + hBl + "&blYy=" + year;
+        String year = sc.next();
+        System.out.print("화물의 송장 번호를 입력하세요 (우체국택배 / 대한통운) : ");
+        String hBl = sc.next();
+        String adress = AddressMaker(key, hBl, year);
 
         Source source = new Source(new URL(adress));
 
-        List<Element> els = source.getAllElements("csclPrgsStts");
-        System.out.println("Elements size:" + els.size());
-        for (int i = 0; i < els.size(); i++) {
-            Element el = els.get(i);
-            System.out.println("content:" + el.getContent());
+        //파싱 후 출력
+        System.out.println();
+        System.out.println("<<<<< 송장번호 " + hBl + " 의 통관 정보입니다. >>>>>" );
+
+        Element current = source.getFirstElement("csclPrgsStts");
+        System.out.println("통관 진행 상태 : " + current.getContent());
+
+        Element goods = source.getFirstElement("prnm");
+        System.out.println("화물명 : " + goods.getContent());
+
+        Element customs = source.getFirstElement("etprCstm");
+        System.out.println("담당 세관 : " + customs.getContent());
         //6079209801262
 
+        sc.close();
+
         }
-        //System.out.println(adress);
+
     }
-}
+
+
